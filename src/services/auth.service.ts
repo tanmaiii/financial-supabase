@@ -83,10 +83,13 @@ export class AuthService {
    */
   async signInWithGoogle() {
     try {
+      // Use environment variable for production, fallback to current origin
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || window.location.origin;
+
       const { data, error } = await this.supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`,
+          redirectTo: `${baseUrl}/auth/callback`,
         },
       });
 
@@ -177,8 +180,10 @@ export class AuthService {
    */
   async resetPassword(email: string) {
     try {
+      const baseUrl = process.env.NEXT_PUBLIC_APP_URL || window.location.origin;
+
       const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/auth/reset-password`,
+        redirectTo: `${baseUrl}/auth/reset-password`,
       });
 
       if (error) {
