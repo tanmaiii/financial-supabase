@@ -26,6 +26,7 @@ import {
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
+import { exportTransactionsToExcelWithHeaders } from "@/utils/exportToExcel";
 import AddTransactionModal from "./add-edit-transaction-modal";
 import TransactionHeader from "./transaction-header";
 import TransactionTable from "./transaction-table";
@@ -166,13 +167,54 @@ export default function Transactions() {
     }
   };
 
+  const handleExport = () => {
+    try {
+      // Get i18n labels for Excel export
+      const excelLabels = {
+        headers: {
+          date: t("export_excel.headers.date"),
+          category: t("export_excel.headers.category"),
+          description: t("export_excel.headers.description"),
+          account: t("export_excel.headers.account"),
+          type: t("export_excel.headers.type"),
+          amount: t("export_excel.headers.amount"),
+          status: t("export_excel.headers.status"),
+        },
+        typeLabels: {
+          income: t("export_excel.type_labels.income"),
+          expense: t("export_excel.type_labels.expense"),
+        },
+        statusLabels: {
+          verified: t("export_excel.status_labels.verified"),
+          unverified: t("export_excel.status_labels.unverified"),
+        },
+      };
+
+      const filename = t("export_excel.filename");
+
+      // Export transactions to Excel
+      exportTransactionsToExcelWithHeaders(
+        transactions,
+        excelLabels.headers,
+        excelLabels.typeLabels,
+        excelLabels.statusLabels,
+        filename,
+      );
+
+      console.log(t("export_excel.success"));
+    } catch (error) {
+      console.error("Export error:", error);
+      alert(t("export_excel.error"));
+    }
+  };
+
   return (
     <div className="flex min-h-screen bg-background">
       {/* Main Content */}
       <div className="flex-1 p-6 lg:p-8 space-y-6 animate-fade-in">
         <TransactionHeader
           totalRecords={totalCount}
-          onExport={() => console.log("Export transactions")}
+          onExport={handleExport}
           onManualAdd={() => setIsAddModalOpen(true)}
         />
 

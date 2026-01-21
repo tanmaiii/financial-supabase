@@ -228,6 +228,28 @@
       "description": "Are you sure you want to delete this transaction? This action cannot be undone.",
       "cancel": "Cancel",
       "confirm": "Delete"
+    },
+    "export_excel": {
+      "filename": "transactions",
+      "headers": {
+        "date": "Date",
+        "category": "Category",
+        "description": "Description",
+        "account": "Account",
+        "type": "Type",
+        "amount": "Amount",
+        "status": "Status"
+      },
+      "type_labels": {
+        "income": "Income",
+        "expense": "Expense"
+      },
+      "status_labels": {
+        "verified": "Verified",
+        "unverified": "Unverified"
+      },
+      "success": "Excel file exported successfully",
+      "error": "Failed to export Excel file"
     }
   },
   "dashboard": {

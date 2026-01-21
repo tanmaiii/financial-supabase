@@ -244,6 +244,28 @@
       "description": "Bạn có chắc chắn muốn xóa giao dịch này? Hành động này không thể hoàn tác.",
       "cancel": "Hủy",
       "confirm": "Xóa"
+    },
+    "export_excel": {
+      "filename": "giao_dich",
+      "headers": {
+        "date": "Ngày",
+        "category": "Danh mục",
+        "description": "Mô tả",
+        "account": "Tài khoản",
+        "type": "Loại",
+        "amount": "Số tiền",
+        "status": "Trạng thái"
+      },
+      "type_labels": {
+        "income": "Thu nhập",
+        "expense": "Chi tiêu"
+      },
+      "status_labels": {
+        "verified": "Đã xác minh",
+        "unverified": "Chưa xác minh"
+      },
+      "success": "Xuất file Excel thành công",
+      "error": "Xuất file Excel thất bại"
     }
   },
   "dashboard": {

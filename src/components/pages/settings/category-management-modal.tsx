@@ -206,7 +206,7 @@ export function CategoryManagementModal({
           {/* Icon Selection */}
           <div className="space-y-2">
             <Label>{t("settings.category_management.icon_label")}</Label>
-            <div className="grid grid-cols-10 gap-2 p-3 border rounded-lg bg-muted/20 max-h-[200px] overflow-y-auto">
+            <div className="grid grid-cols-6 gap-2 p-3 border rounded-lg bg-muted/20 max-h-[200px] overflow-y-auto">
               {CATEGORY_ICONS.map((icon) => (
                 <button
                   key={icon}
