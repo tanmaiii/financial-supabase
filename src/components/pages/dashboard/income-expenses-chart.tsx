@@ -12,6 +12,7 @@ import {
   YAxis,
 } from "recharts";
 import { MonthlyData } from "@/services/dashboard.service";
+import { useTranslations } from "next-intl";
 
 interface IncomeExpensesChartProps {
   data: MonthlyData[];
@@ -20,12 +21,14 @@ interface IncomeExpensesChartProps {
 export default function IncomeExpensesChart({
   data,
 }: IncomeExpensesChartProps) {
+  const t = useTranslations("dashboard.income_vs_expenses");
+
   return (
     <Card className="p-6 col-span-1 lg:col-span-2">
       {/* Header */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold">Income vs Expenses</h3>
-        <p className="text-sm text-muted-foreground">6-month overview</p>
+        <h3 className="text-lg font-semibold">{t("title")}</h3>
+        <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       {/* Chart */}
@@ -60,7 +63,7 @@ export default function IncomeExpensesChart({
             iconType="circle"
             formatter={(value: string) => (
               <span className="text-sm text-foreground capitalize">
-                {value}
+                {t(value as "income" | "expenses")}
               </span>
             )}
           />

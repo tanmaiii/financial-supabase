@@ -263,7 +263,33 @@
     "higher": "higher",
     "lower": "lower",
     "than_last_month": "than last month",
-    "same_as_last_month": "Same as last month"
+    "same_as_last_month": "Same as last month",
+    "income_vs_expenses": {
+      "title": "Income vs Expenses",
+      "subtitle": "6-month overview",
+      "income": "income",
+      "expenses": "expenses"
+    },
+    "spending_categories": {
+      "title": "Spending Categories",
+      "subtitle": "Monthly Breakdown",
+      "total": "TOTAL",
+      "no_data": "No spending data for this month"
+    },
+    "recent_transactions": {
+      "title": "Recent Transactions",
+      "view_all": "View All",
+      "table": {
+        "date": "DATE",
+        "category": "CATEGORY",
+        "description": "DESCRIPTION",
+        "amount": "AMOUNT",
+        "status": "STATUS"
+      },
+      "uncategorized": "Uncategorized",
+      "status_completed": "COMPLETED",
+      "no_transactions": "No transactions yet"
+    }
   },
   "fixed_expenses": {
     "title": "Monthly Fixed Expenses",

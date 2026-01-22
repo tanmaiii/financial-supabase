@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { CategorySpending } from "@/services/dashboard.service";
+import { useTranslations } from "next-intl";
 
 interface SpendingCategoriesChartProps {
   data: CategorySpending[];
@@ -19,12 +20,14 @@ const COLORS = [
 export default function SpendingCategoriesChart({
   data,
 }: SpendingCategoriesChartProps) {
+  const t = useTranslations("dashboard.spending_categories");
+
   return (
     <Card className="p-6">
       {/* Header */}
       <div className="mb-6">
-        <h3 className="text-lg font-semibold">Spending Categories</h3>
-        <p className="text-sm text-muted-foreground">Monthly Breakdown</p>
+        <h3 className="text-lg font-semibold">{t("title")}</h3>
+        <p className="text-sm text-muted-foreground">{t("subtitle")}</p>
       </div>
 
       {/* Chart */}
@@ -61,7 +64,7 @@ export default function SpendingCategoriesChart({
                   .reduce((acc, curr) => acc + curr.value, 0)
                   .toLocaleString()}
               </p>
-              <p className="text-xs text-muted-foreground">TOTAL</p>
+              <p className="text-xs text-muted-foreground">{t("total")}</p>
             </div>
           </div>
           {/* Legend */}
@@ -87,7 +90,7 @@ export default function SpendingCategoriesChart({
         </>
       ) : (
         <div className="flex items-center justify-center h-[250px] text-muted-foreground">
-          <p>No spending data for this month</p>
+          <p>{t("no_data")}</p>
         </div>
       )}
     </Card>

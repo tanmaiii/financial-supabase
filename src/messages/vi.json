@@ -279,7 +279,33 @@
     "higher": "cao hơn",
     "lower": "thấp hơn",
     "than_last_month": "so với tháng trước",
-    "same_as_last_month": "Giống tháng trước"
+    "same_as_last_month": "Giống tháng trước",
+    "income_vs_expenses": {
+      "title": "Thu nhập & Chi tiêu",
+      "subtitle": "Tổng quan 6 tháng",
+      "income": "thu nhập",
+      "expenses": "chi tiêu"
+    },
+    "spending_categories": {
+      "title": "Danh mục chi tiêu",
+      "subtitle": "Phân tích theo tháng",
+      "total": "TỔNG",
+      "no_data": "Không có dữ liệu chi tiêu trong tháng này"
+    },
+    "recent_transactions": {
+      "title": "Giao dịch gần đây",
+      "view_all": "Xem tất cả",
+      "table": {
+        "date": "NGÀY",
+        "category": "DANH MỤC",
+        "description": "MÔ TẢ",
+        "amount": "SỐ TIỀN",
+        "status": "TRẠNG THÁI"
+      },
+      "uncategorized": "Chưa phân loại",
+      "status_completed": "HOÀN THÀNH",
+      "no_transactions": "Chưa có giao dịch nào"
+    }
   },
   "fixed_expenses": {
     "title": "Chi Phí Cố Định Hằng Tháng",

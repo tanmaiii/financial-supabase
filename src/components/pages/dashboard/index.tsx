@@ -1,13 +1,5 @@
 "use client";
 
-import { TrendingDown, TrendingUp } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
-import DashboardHeader from "./dashboard-header";
-import IncomeExpensesChart from "./income-expenses-chart";
-import RecentTransactions from "./recent-transactions";
-import SpendingCategoriesChart from "./spending-categories-chart";
-import StatCard from "./stat-card";
 import {
   CategorySpending,
   dashboardService,
@@ -15,6 +7,13 @@ import {
   MonthlyData,
 } from "@/services/dashboard.service";
 import { TransactionFromDB } from "@/services/transaction.service";
+import { TrendingDown, TrendingUp } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import IncomeExpensesChart from "./income-expenses-chart";
+import RecentTransactions from "./recent-transactions";
+import SpendingCategoriesChart from "./spending-categories-chart";
+import StatCard from "./stat-card";
 
 export default function Dashboard() {
   const t = useTranslations("dashboard");

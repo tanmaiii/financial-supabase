@@ -24,6 +24,9 @@ export async function middleware(request: NextRequest) {
   // Get the pathname
   const pathname = request.nextUrl.pathname;
 
+  console.log("🔍 [Middleware] Pathname:", pathname);
+  console.log("🔍 [Middleware] User authenticated:", !!user);
+
   // Extract locale from path (format: /locale/path)
   const pathSegments = pathname.split("/").filter(Boolean);
   const locale = pathSegments[0];
@@ -34,6 +37,9 @@ export async function middleware(request: NextRequest) {
   // Get path without locale prefix
   const pathWithoutLocale =
     pathSegments.length > 1 ? "/" + pathSegments.slice(1).join("/") : "/";
+
+  console.log("🔍 [Middleware] Path without locale:", pathWithoutLocale);
+  console.log("🔍 [Middleware] Valid locale:", validLocale);
 
   // Check if current path is a protected route (exact match or starts with)
   const isProtectedRoute = protectedPaths.some(
@@ -47,10 +53,16 @@ export async function middleware(request: NextRequest) {
       pathWithoutLocale === path || pathWithoutLocale.startsWith(path + "/"),
   );
 
+  console.log("🔍 [Middleware] Is protected route:", isProtectedRoute);
+  console.log("🔍 [Middleware] Is auth route:", isAuthRoute);
+
   // If user is not authenticated and trying to access protected route
   if (isProtectedRoute && !user) {
-    const loginUrl = new URL(`/${validLocale}/login`, request.url);
+    // Create clean URL without query params
+    const loginUrl = `${request.nextUrl.origin}/${validLocale}/login`;
     const redirectResponse = NextResponse.redirect(loginUrl);
+
+    console.log("⚠️ [Middleware] Redirecting to login:", loginUrl);
 
     // Preserve Supabase session cookies
     supabaseResponse.cookies.getAll().forEach((cookie) => {
@@ -62,8 +74,14 @@ export async function middleware(request: NextRequest) {
 
   // If user is authenticated and trying to access auth pages, redirect to home
   if (isAuthRoute && user) {
-    const homeUrl = new URL(`/${validLocale}/dashboard`, request.url);
+    // Create clean URL without query params - use origin instead of request.url
+    const homeUrl = `${request.nextUrl.origin}/${validLocale}/dashboard`;
     const redirectResponse = NextResponse.redirect(homeUrl);
+
+    console.log(
+      "⚠️ [Middleware] User authenticated, redirecting to dashboard:",
+      homeUrl,
+    );
 
     // Preserve Supabase session cookies
     supabaseResponse.cookies.getAll().forEach((cookie) => {

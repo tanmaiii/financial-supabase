@@ -1,11 +1,12 @@
-import React from "react";
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, DollarSign } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { PATHS, withLocale } from "@/constants/path";
 import { TransactionFromDB } from "@/services/transaction.service";
-import { format } from "date-fns";
 import dayjs from "dayjs";
+import { ArrowRight, DollarSign } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { useParams, useRouter } from "next/navigation";
 
 interface RecentTransactionsProps {
   transactions: TransactionFromDB[];
@@ -20,15 +21,24 @@ const getCategoryIcon = (_categoryIcon?: string | null) => {
 export default function RecentTransactions({
   transactions,
 }: RecentTransactionsProps) {
+  const t = useTranslations("dashboard.recent_transactions");
+  const router = useRouter();
+  const params = useParams();
+  const locale = params.locale as string;
+
   return (
     <Card className="p-6 lg:col-span-3">
       {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg font-semibold">Recent Transactions</h3>
+          <h3 className="text-lg font-semibold">{t("title")}</h3>
         </div>
-        <Button variant="link" className="text-primary hover:text-primary/80">
-          View All
+        <Button
+          variant="link"
+          onClick={() => router.push(withLocale(locale, PATHS.TRANSACTIONS))}
+          className="text-primary hover:text-primary/80"
+        >
+          {t("view_all")}
           <ArrowRight className="w-4 h-4 ml-1" />
         </Button>
       </div>
@@ -39,19 +49,19 @@ export default function RecentTransactions({
           <thead>
             <tr className="border-b border-border">
               <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
-                DATE
+                {t("table.date")}
               </th>
               <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
-                CATEGORY
+                {t("table.category")}
               </th>
               <th className="text-left py-3 px-4 text-sm font-medium text-muted-foreground">
-                DESCRIPTION
+                {t("table.description")}
               </th>
               <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">
-                AMOUNT
+                {t("table.amount")}
               </th>
               <th className="text-right py-3 px-4 text-sm font-medium text-muted-foreground">
-                STATUS
+                {t("table.status")}
               </th>
             </tr>
           </thead>
@@ -88,7 +98,7 @@ export default function RecentTransactions({
                           />
                         </div>
                         <span className="text-sm text-foreground">
-                          {transaction.categories?.name || "Uncategorized"}
+                          {transaction.categories?.name || t("uncategorized")}
                         </span>
                       </div>
                     </td>
@@ -110,7 +120,7 @@ export default function RecentTransactions({
                         variant="default"
                         className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20"
                       >
-                        COMPLETED
+                        {t("status_completed")}
                       </Badge>
                     </td>
                   </tr>
@@ -122,7 +132,7 @@ export default function RecentTransactions({
                   colSpan={5}
                   className="py-8 text-center text-muted-foreground"
                 >
-                  No transactions yet
+                  {t("no_transactions")}
                 </td>
               </tr>
             )}
